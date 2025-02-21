@@ -1,10 +1,9 @@
 import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { Field, Form, Formik, ErrorMessage } from 'formik';
-import { nanoid } from "nanoid";
 import * as Yup from 'yup'
-import { addContact } from "../../redux/contactsSlice";
 import css from "./ContactForm.module.css"
+import { addContact } from "../../redux/contactsOps";
 
 const check = Yup.object({
     name: Yup.string()
@@ -16,8 +15,8 @@ const check = Yup.object({
     ,
     number: Yup.string()
         .trim()
-        .min(9, "Too short!")
-        .max(9, "Too long!")
+        .min(12, "Too short!")
+        .max(12, "Too long!")
         .required("Required")
         .matches(/^[0-9]+-/, "Number must contain only digits" )
 })
@@ -27,7 +26,6 @@ const ContactForm = () => {
     const dispatch = useDispatch();
     const handSub = (values, actions) => {
         const newCont = {
-            id: nanoid(),
             name: values.name,
             number: values.number,
         }
