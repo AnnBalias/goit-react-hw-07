@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchData } from "./contactsOps";
 
 const initialState = {
   items: [],
+  loading: false,
+  error: null,
 };
 
 const slice = createSlice({
@@ -14,6 +17,11 @@ const slice = createSlice({
     deleteContact: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchData.fulfilled, (state, action) => {
+      state.items = action.payload;
+    });
   },
 });
 

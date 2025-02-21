@@ -8,11 +8,18 @@ import contacts from "./contacts.json";
 // import styles
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from './redux/contactsOps';
 // import { addContact } from './redux/contactsSlice';
 
 
 const App = () => {
+
+  const dispatch = useDispatch();
   
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
     <div>
       <h1 className='header'>Phonebook</h1>
